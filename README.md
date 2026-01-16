@@ -40,6 +40,11 @@ Professional website for a medical practice offering:
 - **Git** - Version control
 - **GitHub Actions** - CI/CD pipeline for automated deployment
 - **GitHub Pages** - Static site hosting
+- **Webpack 5** - Module bundler and asset optimization
+- **Babel** - JavaScript transpilation
+- **Terser** - JavaScript minification
+- **CSS Minimizer** - CSS compression
+- **Gzip/Brotli Compression** - File compression for better performance
 
 ### Web Standards
 - **Web App Manifest** - PWA support
@@ -80,6 +85,9 @@ www/
 - ✅ Contact forms integration (Formspree)
 - ✅ Fast loading times
 - ✅ Valid HTML5 markup
+- ✅ Gzip and Brotli compression
+- ✅ Minified JavaScript and CSS
+- ✅ Optimized assets
 
 ## 📱 Pages
 

@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -165,6 +168,24 @@ module.exports = (env, argv) => {
       ...(isProduction ? [
         new MiniCssExtractPlugin({
           filename: 'assets/css/[name].[contenthash].css'
+        }),
+        new CompressionPlugin({
+          algorithm: 'gzip',
+          test: /\.(js|css|html|svg|json|xml|txt)$/,
+          threshold: 8192,
+          minRatio: 0.8,
+          deleteOriginalAssets: false
+        }),
+        new CompressionPlugin({
+          filename: '[path][base].br',
+          algorithm: 'brotliCompress',
+          test: /\.(js|css|html|svg|json|xml|txt)$/,
+          compressionOptions: {
+            level: 11
+          },
+          threshold: 8192,
+          minRatio: 0.8,
+          deleteOriginalAssets: false
         })
       ] : [])
     ],
@@ -174,6 +195,33 @@ module.exports = (env, argv) => {
       }
     },
     optimization: {
+      minimize: isProduction,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+              pure_funcs: ['console.log', 'console.info', 'console.debug']
+            },
+            format: {
+              comments: false
+            }
+          },
+          extractComments: false
+        }),
+        new CssMinimizerPlugin({
+          minimizerOptions: {
+            preset: [
+              'default',
+              {
+                discardComments: { removeAll: true },
+                normalizeWhitespace: true
+              }
+            ]
+          }
+        })
+      ],
       splitChunks: {
         chunks: 'all',
         cacheGroups: {
