@@ -125,7 +125,9 @@ The website is automatically deployed to GitHub Pages using GitHub Actions when 
 
 ## 📝 License
 
-All rights reserved. © 2025 badaniaokresowe.com.pl
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+© 2025 badaniaokresowe.com.pl
 
 ## 👨‍💻 Development
 
