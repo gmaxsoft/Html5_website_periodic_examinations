@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.min.js
+jquery*.js
+fontawesome.js
+solid.js
+browser.min.js
+breakpoints.min.js
+jquery.dropotron.min.js
+jquery.scrollex.min.js

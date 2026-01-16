@@ -1,3 +1,19 @@
 # Google verification and ads files
 ads.txt
 googlebe45dfc5ad1b8108.html
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local

@@ -6,9 +6,9 @@
 	 */
 	$.fn.navList = function() {
 
-		var	$this = $(this);
-			$a = $this.find('a'),
-			b = [];
+	var	$this = $(this),
+		$a = $this.find('a'),
+		b = [];
 
 		$a.each(function() {
 
@@ -94,9 +94,9 @@
 
 			}, userConfig);
 
-			// Expand "target" if it's not a jQuery object already.
-				if (typeof config.target != 'jQuery')
-					config.target = $(config.target);
+		// Expand "target" if it's not a jQuery object already.
+			if (typeof config.target !== 'object' || !(config.target instanceof jQuery))
+				config.target = $(config.target);
 
 		// Panel.
 
@@ -180,10 +180,10 @@
 			// Event: Touch stuff.
 				$this.on('touchstart', function(event) {
 
-					$this.touchPosX = event.originalEvent.touches[0].pageX;
-					$this.touchPosY = event.originalEvent.touches[0].pageY;
+				$this.touchPosX = event.originalEvent.touches[0].pageX;
+				$this.touchPosY = event.originalEvent.touches[0].pageY;
 
-				})
+			});
 
 				$this.on('touchmove', function(event) {
 
@@ -434,8 +434,8 @@
 			$this
 				.on('submit', function() {
 
-					$this.find('input[type=text],input[type=password],textarea')
-						.each(function(event) {
+				$this.find('input[type=text],input[type=password],textarea')
+					.each(function() {
 
 							var i = $(this);
 
@@ -527,9 +527,9 @@
 
 		var key = '__prioritize';
 
-		// Expand $elements if it's not already a jQuery object.
-			if (typeof $elements != 'jQuery')
-				$elements = $($elements);
+	// Expand $elements if it's not already a jQuery object.
+		if (typeof $elements !== 'object' || !($elements instanceof jQuery))
+			$elements = $($elements);
 
 		// Step through elements.
 			$elements.each(function() {
