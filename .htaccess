@@ -1,5 +1,9 @@
+# Apache — legacy / lokalne środowisko z mod_rewrite.
+# Produkcja: OVH VPS + nginx (konfiguracja w lokalnym katalogu deploy/).
+# Reguły HTTPS, www i nagłówki bezpieczeństwa są w nginx, nie tutaj.
+
 Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-Header set X-Frame-Options "ALLOW-FROM URL"
+Header set X-Frame-Options "SAMEORIGIN"
 Header set X-Content-Type-Options nosniff
 Header set Referrer-Policy "same-origin"
 #Header always set Permissions-Policy "geolocation=(), midi=(),sync-xhr=(),accelerometer=(), gyroscope=(), magnetometer=(), camera=(), fullscreen=(self)"

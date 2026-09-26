@@ -38,13 +38,13 @@ Professional website for a medical practice offering:
 
 ### Development & Deployment
 - **Git** - Version control
-- **GitHub Actions** - CI/CD pipeline for automated deployment
-- **GitHub Pages** - Static site hosting
+- **OVH VPS + nginx** - Production hosting (static files from `dist/`)
+- **GitHub Actions / GitHub Pages** - Optional mirror / CI build
 - **Webpack 5** - Module bundler and asset optimization
 - **Babel** - JavaScript transpilation
 - **Terser** - JavaScript minification
 - **CSS Minimizer** - CSS compression
-- **Gzip/Brotli Compression** - File compression for better performance
+- **Gzip/Brotli Compression** - Prefabricated `.gz` / `.br` served by nginx (`gzip_static`)
 
 ### Web Standards
 - **Web App Manifest** - PWA support
@@ -124,12 +124,29 @@ php -S localhost:8000
 
 ## 🚢 Deployment
 
-The website is automatically deployed to GitHub Pages using GitHub Actions when changes are pushed to the `main` or `master` branch.
+### Production (OVH VPS + nginx)
 
-### Manual Deployment
-1. Push changes to the repository
-2. GitHub Actions will automatically build and deploy
-3. The site will be available at the configured GitHub Pages URL
+Produkcja działa na VPS OVH z **nginx** (bez Apache). Build Webpack (`dist/`) jest serwowany jako pliki statyczne.
+
+1. Zbuduj stronę:
+```bash
+npm ci
+npm run build
+```
+
+2. Wgraj zawartość `dist/` na serwer, np. do:
+   `/var/www/badaniaokresowe.com.pl/html`
+
+3. Konfiguracja nginx (HTTPS, przekierowanie na `www`, nagłówki bezpieczeństwa, `gzip_static` dla plików z Webpack) jest utrzymywana lokalnie w katalogu `deploy/` (nie jest w repozytorium).
+
+DNS: rekordy `A`/`AAAA` dla `badaniaokresowe.com.pl` i `www` → IP VPS.  
+SSL: Let's Encrypt (`certbot --nginx`).
+
+Kanoniczny adres: `https://www.badaniaokresowe.com.pl` (HTTP i host bez `www` są przekierowywane).
+
+### GitHub Pages (opcjonalnie)
+
+Push na `main` / `master` nadal uruchamia GitHub Actions i może publikować mirror na GitHub Pages.
 
 ## 📝 License
 
